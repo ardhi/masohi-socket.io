@@ -1,0 +1,29 @@
+{
+  "name": "waibu-socket.io",
+  "version": "1.0.0",
+  "description": "Socket.IO Binding for Waibu Framework",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ardhi/waibu-socket.io.git"
+  },
+  "keywords": [
+    "socket.io",
+    "bajo",
+    "framework",
+    "modular"
+  ],
+  "author": "Ardhi Lukianto <ardhi@lukianto.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ardhi/waibu-socket.io/issues"
+  },
+  "homepage": "https://github.com/ardhi/waibu-socket.io#readme",
+  "dependencies": {
+    "socket.io": "^4.7.5"
+  }
+}

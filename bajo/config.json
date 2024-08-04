@@ -1,0 +1,13 @@
+{
+  "alias": "wbsio",
+  "options": {
+    "cleanupEmptyChildNamespaces": true,
+    "connectionStateRecovery": true,
+    "serveClient": true,
+    "cors": {
+      "origin": "*"
+    }
+  },
+  "connections": [],
+  "dependencies": ["waibu"]
+}

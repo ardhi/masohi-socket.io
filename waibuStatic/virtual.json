@@ -1,0 +1,4 @@
+[{
+  "prefix": "client",
+  "root": "node_modules/socket.io/client-dist"
+}]
