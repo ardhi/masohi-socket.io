@@ -1,6 +1,6 @@
 function getServerOptions () {
   const options = this.getConfig('options')
-  options.path = `/${this.config.alias}/`
+  options.path = `/${this.alias}/`
   options.serveClient = false
   return options
 }

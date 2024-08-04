@@ -7,7 +7,7 @@ async function handler ({ item, options }) {
 
 async function init () {
   const { buildCollections } = this.app.bajo
-  this.connections = await buildCollections({ ns: this.ns, handler, useDefaultName: false, dupChecks: ['name', 'room'] })
+  this.connections = await buildCollections({ ns: this.name, handler, useDefaultName: false, dupChecks: ['name', 'room'] })
 }
 
 export default init

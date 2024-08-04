@@ -16,7 +16,7 @@ const onClose = {
       })
     }
     for (const event of clientEvents) {
-      socket.on(event, async function (...params) {
+      socket.on(event, async (...params) => {
         if (this.app.bajoEmitter) this.app.bajoEmitter.emit(`${this.name}.${camelCase(`client ${event}`)}`, socket, ...params)
         await runHook(`${this.name}:${camelCase('on client ' + event)}`, socket, ...params)
       })
