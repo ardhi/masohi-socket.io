@@ -1,5 +1,5 @@
 {
-  "alias": "wbsio",
+  "alias": "wsio",
   "options": {
     "cleanupEmptyChildNamespaces": true,
     "connectionStateRecovery": true,

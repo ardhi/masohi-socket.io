@@ -1,6 +1,6 @@
 # waibu-socket.io
 
-Plugin name: **waibuRestApi**, alias: **wbrest**
+Plugin name: **waibuRestApi**, alias: **wrest**
 
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/ardhi/waibu-socket.io) ![NPM Version](https://img.shields.io/npm/v/waibu-socket.io)
 
