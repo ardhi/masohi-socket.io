@@ -7,6 +7,5 @@
       "origin": "*"
     }
   },
-  "connections": [],
-  "dependencies": ["waibu"]
+  "connections": []
 }
