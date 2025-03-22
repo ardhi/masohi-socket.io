@@ -1,6 +1,6 @@
 async function send ({ msg, from, to, subject = 'message' } = {}) {
   const { addressSplit } = this.app.bajoEmitter
-  const { find } = this.app.bajo.lib._
+  const { find } = this.lib._
   const { connection, plugin } = addressSplit(to)
   if (plugin !== 'waibuSocketIo') return
   const name = connection

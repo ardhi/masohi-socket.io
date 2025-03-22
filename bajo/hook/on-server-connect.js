@@ -3,7 +3,7 @@ const clientEvents = ['disconnecting', 'disconnect']
 const onClose = {
   handler: function (socket, ...args) {
     const { runHook } = this.app.bajo
-    const { camelCase } = this.app.bajo.lib._
+    const { camelCase } = this.lib._
     this.log.debug('Client \'%s\' is %s', socket.id, this.log.write('connected'))
     for (const m of this.clientMiddlewares) {
       socket.use(async ([event, ...params], next) => {

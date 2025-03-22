@@ -1,5 +1,5 @@
 async function handler ({ item, options }) {
-  const { isString, has } = this.app.bajo.lib._
+  const { isString, has } = this.lib._
   if (isString(item)) item = { name: item }
   if (!has(item, 'room')) throw this.error('Connection must have a \'room\' name')
   item.anonymous = item.anonymous ?? false
