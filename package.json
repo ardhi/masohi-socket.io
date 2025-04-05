@@ -1,7 +1,7 @@
 {
-  "name": "waibu-socket.io",
-  "version": "1.1.1",
-  "description": "Socket.IO Binding for Waibu Framework",
+  "name": "masohi-socket.io",
+  "version": "1.1.0",
+  "description": "Socket.IO Binding for Masohi Messaging & Waibu Framework",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,10 +9,13 @@
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ardhi/waibu-socket.io.git"
+    "url": "git+https://github.com/ardhi/masohi-socket.io.git"
   },
   "keywords": [
     "socket.io",
+    "masohi",
+    "messaging",
+    "waibu",
     "bajo",
     "framework",
     "modular"
@@ -20,10 +23,10 @@
   "author": "Ardhi Lukianto <ardhi@lukianto.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ardhi/waibu-socket.io/issues"
+    "url": "https://github.com/ardhi/masohi-socket.io/issues"
   },
-  "homepage": "https://github.com/ardhi/waibu-socket.io#readme",
+  "homepage": "https://github.com/ardhi/masohi-socket.io#readme",
   "dependencies": {
-    "socket.io": "^4.7.5"
+    "socket.io": "^4.8.1"
   }
 }

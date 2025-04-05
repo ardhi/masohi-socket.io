@@ -1,5 +1,4 @@
 {
-  "Connection must have a 'room' name": "",
-  "Client '%s' join to room '%s'": "",
-  "Client '%s' is %s": ""
+  "client%s%s": "Klien '%s' %s",
+  "clientJoinRoom%s%s": "Klien '%s' join ke ruang '%s'"
 }

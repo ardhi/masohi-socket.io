@@ -1,0 +1,4 @@
+{
+  "client%s%s": "Client '%s' is %s",
+  "clientJoinRoom%s%s": "Client '%s' join to room '%s'"
+}
