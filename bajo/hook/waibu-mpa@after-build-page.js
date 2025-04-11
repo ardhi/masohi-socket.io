@@ -6,6 +6,9 @@ async function waibuMpaAfterBuildPage ({ $ }) {
   const inline = `
 <script>
   socket = io({ path: '${options.path}'})
+  socket.on('voyage', msg => {
+    console.log(msg)
+  })
 </script>`
   $('body').append(inline)
 }

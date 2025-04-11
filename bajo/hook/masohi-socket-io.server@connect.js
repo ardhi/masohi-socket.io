@@ -6,18 +6,6 @@ async function serverConnect ({ payload } = {}) {
   const { runHook } = this.app.bajo
   const { camelCase } = this.lib._
   this.log.debug('client%s%s', socket.id, this.log.write('connected'))
-  /*
-  for (const m of this.clientMiddlewares) {
-    socket.use(async ([event, ...params], next) => {
-      try {
-        await m.handler.call(this, event, ...params)
-        next()
-      } catch (err) {
-        next(err)
-      }
-    })
-  }
-  */
   for (const event of clientEvents) {
     socket.on(event, async (...params) => {
       await runHook(`${this.name}:${camelCase('client ' + event)}`, socket, ...params)
@@ -36,12 +24,7 @@ async function serverConnect ({ payload } = {}) {
       await runHook(`${this.name}:data`, msg, subject, socket)
     }
   })
-  // room connections
-  for (const conn of this.connections) {
-    // if (!conn.anonymous || !socket.session) return
-    socket.join(conn.room)
-    this.log.trace('clientJoinRoom%s%s', socket.id, conn.room)
-  }
+  socket.join(this.config.roomLobby)
 }
 
 export default serverConnect

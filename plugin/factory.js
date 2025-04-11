@@ -1,3 +1,5 @@
+import collectMiddlewares from '../lib/collect-middlewares.js'
+
 async function factory (pkgName) {
   const me = this
 
@@ -5,7 +7,7 @@ async function factory (pkgName) {
     constructor () {
       super(pkgName, me.app)
       this.alias = 'sio'
-      this.dependencies = ['waibu']
+      this.dependencies = ['waibu-mpa']
       this.config = {
         options: {
           cleanupEmptyChildNamespaces: true,
@@ -15,7 +17,7 @@ async function factory (pkgName) {
             origin: '*'
           }
         },
-        connections: []
+        roomLobby: 'lobby'
       }
       this.events = {
         engine: ['initial_headers', 'headers', 'connection_error'],
@@ -24,21 +26,7 @@ async function factory (pkgName) {
     }
 
     init = async () => {
-      const { buildCollections } = this.app.bajo
-
-      const handler = async ({ item, options }) => {
-        const { isString } = this.lib._
-        if (isString(item)) item = { name: item }
-        // if (!has(item, 'room')) throw this.error('isRequired%s', 'name')
-        item.anonymous = item.anonymous ?? false
-      }
-
-      this.connections = await buildCollections({ ns: this.name, container: 'connections', handler, useDefaultName: false, dupChecks: ['name', 'room'] })
-      this.connections.unshift({
-        name: 'default',
-        room: 'lobby',
-        anonymous: true
-      })
+      await collectMiddlewares.call(this)
     }
 
     getServerOptions = () => {
@@ -48,25 +36,20 @@ async function factory (pkgName) {
       return options
     }
 
-    send = async (topic, params = {}, options = {}) => {
+    send = async (params = {}, options = {}) => {
       if (!this.instance) return
-      const { find, isPlainObject } = this.lib._
-      const { breakNsPath } = this.app.bajo
-      if (isPlainObject(topic)) {
-        params = topic
-      } else params.subject = topic
-      const { payload, connection = 'default', source } = params
+      const { isString } = this.lib._
+      const { breakNsPath, callHandler } = this.app.bajo
+      const { subject, payload, source, to = 'lobby' } = params
       const { ns } = breakNsPath(source)
-      const { timeout, callback } = options
-      const c = find(this.connections, { name: connection })
-      if (!c) throw this.error('notFound%s%s', this.print.write('connection'), `${connection}@masohiSocketIo`)
-      if (c.room && payload) {
-        let send = this.instance.to(c.room)
-        if (timeout) send = send.timeout(timeout)
+      const { timeout = 0, callback } = options
+      const socks = await this.instance.in(to).fetchSockets()
+      for (const sock of socks) {
         if (callback) {
-          const resp = await send.emitWithAck(params.subject, payload)
-          callback.call(this.app[ns], resp)
-        } else send.emit(params.subject, payload)
+          const resp = await sock.timeout(timeout).emitWithAck(params.subject, payload)
+          if (isString(callback)) await callHandler(callback, resp)
+          else await callback.call(this.app[ns], resp)
+        } else sock.emit(subject, payload)
       }
     }
   }
