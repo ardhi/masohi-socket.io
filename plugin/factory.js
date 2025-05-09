@@ -40,16 +40,19 @@ async function factory (pkgName) {
       if (!this.instance) return
       const { isString } = this.lib._
       const { breakNsPath, callHandler } = this.app.bajo
-      const { subject, payload, source, to = 'lobby' } = params
+      let { subject, payload, source, to = 'lobby' } = params
       const { ns } = breakNsPath(source)
       const { timeout = 0, callback } = options
-      const socks = await this.instance.in(to).fetchSockets()
-      for (const sock of socks) {
-        if (callback) {
-          const resp = await sock.timeout(timeout).emitWithAck(params.subject, payload)
-          if (isString(callback)) await callHandler(callback, resp)
-          else await callback.call(this.app[ns], resp)
-        } else sock.emit(subject, payload)
+      if (isString(to)) to = [to]
+      for (const t of to) {
+        const socks = await this.instance.in(t).fetchSockets()
+        for (const sock of socks) {
+          if (callback) {
+            const resp = await sock.timeout(timeout).emitWithAck(params.subject, payload)
+            if (isString(callback)) await callHandler(callback, resp)
+            else await callback.call(this.app[ns], resp)
+          } else sock.emit(subject, payload)
+        }
       }
     }
   }
