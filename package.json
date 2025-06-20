@@ -1,6 +1,6 @@
 {
   "name": "masohi-socket.io",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "description": "Socket.IO Binding for Masohi Messaging & Waibu Framework",
   "main": "index.js",
   "scripts": {

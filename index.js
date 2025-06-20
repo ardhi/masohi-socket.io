@@ -1,4 +1,4 @@
-import collectMiddlewares from '../lib/collect-middlewares.js'
+import collectMiddlewares from './lib/collect-middlewares.js'
 
 async function factory (pkgName) {
   const me = this
