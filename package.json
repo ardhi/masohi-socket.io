@@ -1,12 +1,15 @@
 {
   "name": "masohi-socket.io",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Socket.IO Binding for Masohi Messaging & Waibu Framework",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "type": "module",
+  "bajo": {
+    "type": "plugin"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ardhi/masohi-socket.io.git"
