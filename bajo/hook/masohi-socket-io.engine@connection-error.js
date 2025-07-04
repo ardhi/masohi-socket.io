@@ -1,5 +1,5 @@
-async function engineConnectionError (err) {
-  this.log.error('error%s', err.message, err)
+async function engineConnectionError ({ error } = {}) {
+  this.log.error('error%s', error.message)
 }
 
 export default engineConnectionError

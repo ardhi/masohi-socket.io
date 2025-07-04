@@ -21,6 +21,7 @@ async function factory (pkgName) {
       }
       this.events = {
         engine: ['initial_headers', 'headers', 'connection_error'],
+        namespace: ['connect'],
         server: ['connect', 'new_namespace']
       }
     }

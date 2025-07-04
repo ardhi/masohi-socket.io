@@ -1,11 +1,19 @@
 import { Server } from 'socket.io'
 
-async function beforeSubApp () {
+async function afterSubApp () {
   const { runHook } = this.app.bajo
   const { get, camelCase } = this.lib._
   const options = this.getServerOptions()
   const instance = this.app.waibuMpa.instance
   this.instance = new Server(instance.server, options)
+  instance.addHook('preClose', done => {
+    this.instance.local.disconnectSockets(true)
+    done()
+  })
+  instance.addHook('onClose', done => {
+    this.instance.close()
+    done()
+  })
   // server middlewares
   for (const m of this.serverMiddlewares) {
     this.instance.use(async (socket, next) => {
@@ -34,12 +42,19 @@ async function beforeSubApp () {
       const instance = get(this, k === 'engine' ? 'instance.engine' : 'instance')
       instance.on(evt, async (...data) => {
         const path = camelCase(evt)
-        const type = k === 'engine' && evt === 'connection_error' ? evt : 'string'
-        const params = { source: this.name, payload: { type, data } }
+        let error
+        let payload = { type: 'object', data: data[0] }
+        if (k === 'engine') {
+          if (evt === 'connection_error') error = new Error(data[0].message)
+          else payload = { type: 'array', data }
+        } else if (k === 'server') {
+          if (evt === 'new_namespace') payload.type = 'string'
+        }
+        const params = { source: this.name, payload, error }
         await runHook(`${this.name}.${k}:${path}`, params)
       })
     }
   }
 }
 
-export default beforeSubApp
+export default afterSubApp

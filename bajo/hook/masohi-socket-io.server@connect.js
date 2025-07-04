@@ -1,14 +1,13 @@
-const clientEvents = ['disconnecting', 'disconnect']
+const socketEvents = ['disconnecting', 'disconnect']
 
 async function serverConnect ({ payload } = {}) {
-  const { data } = payload
-  const [socket] = data
+  const { data: socket } = payload
   const { runHook } = this.app.bajo
   const { camelCase } = this.lib._
-  this.log.debug('client%s%s', socket.id, this.log.write('connected'))
-  for (const event of clientEvents) {
+  this.log.debug('clientIs%s%s', socket.id, this.log.write('connected'))
+  for (const event of socketEvents) {
     socket.on(event, async (...params) => {
-      await runHook(`${this.name}:${camelCase('client ' + event)}`, socket, ...params)
+      await runHook(`${this.name}:${camelCase('socket ' + event)}`, socket, ...params)
     })
   }
   // catchall
