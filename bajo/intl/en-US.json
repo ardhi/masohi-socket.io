@@ -1,4 +1,5 @@
 {
+  "masohiSocketIo": "Socket.io",
   "clientIs%s%s": "Client '%s' is %s",
   "socketIs%s%s": "Socket '%s' is %s",
   "clientJoinRoom%s%s": "Client '%s' join to room '%s'"
