@@ -3,7 +3,7 @@ import collectMiddlewares from './lib/collect-middlewares.js'
 async function factory (pkgName) {
   const me = this
 
-  return class WaibuSocketIo extends this.lib.BajoPlugin {
+  return class WaibuSocketIo extends this.lib.Plugin {
     constructor () {
       super(pkgName, me.app)
       this.alias = 'sio'
