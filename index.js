@@ -3,11 +3,12 @@ import collectMiddlewares from './lib/collect-middlewares.js'
 async function factory (pkgName) {
   const me = this
 
-  return class WaibuSocketIo extends this.lib.Plugin {
+  class WaibuSocketIo extends this.lib.Plugin {
+    static alias = 'sio'
+    static dependencies = ['waibu-mpa']
+
     constructor () {
       super(pkgName, me.app)
-      this.alias = 'sio'
-      this.dependencies = ['waibu-mpa']
       this.config = {
         options: {
           cleanupEmptyChildNamespaces: true,
@@ -57,6 +58,8 @@ async function factory (pkgName) {
       }
     }
   }
+
+  return WaibuSocketIo
 }
 
 export default factory
