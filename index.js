@@ -3,7 +3,7 @@ import collectMiddlewares from './lib/collect-middlewares.js'
 async function factory (pkgName) {
   const me = this
 
-  class WaibuSocketIo extends this.lib.Plugin {
+  class WaibuSocketIo extends this.app.pluginClass.base {
     static alias = 'sio'
     static dependencies = ['waibu-mpa']
 
@@ -40,7 +40,7 @@ async function factory (pkgName) {
 
     send = async (params = {}, options = {}) => {
       if (!this.instance) return
-      const { isString } = this.lib._
+      const { isString } = this.app.lib._
       const { breakNsPath, callHandler } = this.app.bajo
       let { subject, payload, source, to = 'lobby' } = params
       const { ns } = breakNsPath(source)

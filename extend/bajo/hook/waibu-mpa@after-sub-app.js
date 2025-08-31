@@ -2,7 +2,7 @@ import { Server } from 'socket.io'
 
 async function afterSubApp () {
   const { runHook } = this.app.bajo
-  const { get, camelCase } = this.lib._
+  const { get, camelCase } = this.app.lib._
   const options = this.getServerOptions()
   const instance = this.app.waibuMpa.instance
   this.instance = new Server(instance.server, options)

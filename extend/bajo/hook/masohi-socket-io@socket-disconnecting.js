@@ -1,6 +1,6 @@
 const onClientDisconnect = {
   handler: function (socket) {
-    this.log.trace('socketIs%s%s', socket.id, this.print.write('disconnecting'))
+    this.log.trace('socketIs%s%s', socket.id, this.t('disconnecting'))
   },
   level: 1000
 }
