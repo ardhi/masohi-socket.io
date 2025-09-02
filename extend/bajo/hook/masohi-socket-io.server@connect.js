@@ -7,7 +7,7 @@ async function serverConnect ({ payload } = {}) {
   this.log.debug('clientIs%s%s', socket.id, this.t('connected'))
   for (const event of socketEvents) {
     socket.on(event, async (...params) => {
-      await runHook(`${this.name}:${camelCase('socket ' + event)}`, socket, ...params)
+      await runHook(`${this.ns}:${camelCase('socket ' + event)}`, socket, ...params)
     })
   }
   // catchall
@@ -17,10 +17,10 @@ async function serverConnect ({ payload } = {}) {
     if (room) {
       const conns = this.connections.filter(c => c.room === room)
       for (const c of conns) {
-        await runHook(`${this.name}:data`, msg, subject, c, socket)
+        await runHook(`${this.ns}:data`, msg, subject, c, socket)
       }
     } else {
-      await runHook(`${this.name}:data`, msg, subject, socket)
+      await runHook(`${this.ns}:data`, msg, subject, socket)
     }
   })
   socket.join(this.config.roomLobby)

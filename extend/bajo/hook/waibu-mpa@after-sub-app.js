@@ -50,8 +50,8 @@ async function afterSubApp () {
         } else if (k === 'server') {
           if (evt === 'new_namespace') payload.type = 'string'
         }
-        const params = { source: this.name, payload, error }
-        await runHook(`${this.name}.${k}:${path}`, params)
+        const params = { source: this.ns, payload, error }
+        await runHook(`${this.ns}.${k}:${path}`, params)
       })
     }
   }
