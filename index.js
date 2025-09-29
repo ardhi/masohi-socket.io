@@ -1,9 +1,20 @@
 import collectMiddlewares from './lib/collect-middlewares.js'
 
+/**
+ * Plugin factory
+ *
+ * @param {string} pkgName - NPM package name
+ * @returns {class}
+ */
 async function factory (pkgName) {
   const me = this
 
-  class WaibuSocketIo extends this.app.pluginClass.base {
+  /**
+   * MasohiSocketIo class
+   *
+   * @class
+   */
+  class MasohiSocketIo extends this.app.pluginClass.base {
     static alias = 'sio'
     static dependencies = ['waibu-mpa']
 
@@ -59,7 +70,7 @@ async function factory (pkgName) {
     }
   }
 
-  return WaibuSocketIo
+  return MasohiSocketIo
 }
 
 export default factory
