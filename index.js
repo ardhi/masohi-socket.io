@@ -14,7 +14,7 @@ async function factory (pkgName) {
    *
    * @class
    */
-  class MasohiSocketIo extends this.app.pluginClass.base {
+  class MasohiSocketIo extends this.app.baseClass.Base {
     static alias = 'sio'
     static dependencies = ['waibu-mpa']
 
