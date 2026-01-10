@@ -9,7 +9,9 @@
   },
   "type": "module",
   "bajo": {
-    "type": "plugin"
+    "type": "plugin",
+    "alias": "msio",
+    "dependencies": ["masohi", "waibu-mpa"]
   },
   "repository": {
     "type": "git",
